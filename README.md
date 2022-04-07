@@ -1,4 +1,4 @@
-# Awesome SUE
+# Awesome SEU
 
 <a href="https://github.com/preminstrel/awesome-seu">![GitHub Repo stars](https://img.shields.io/github/stars/preminstrel/awesome-seu?style=flat-square&logo=github&color=yellow)</a>
 <a href="https://github.com/preminstrel/awesome-seu">![Github Repo downloads](https://img.shields.io/github/downloads/preminstrel/awesome-seu/total?style=flat-square)
