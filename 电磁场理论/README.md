@@ -35,12 +35,14 @@
 - $J=\rho_S v\quad J=Nqv$
 - 恒定电流场的基本方程
 - 拉普拉斯算符 $\nabla^{2}$
+
 $$
 \begin{gathered}
 \nabla^{2}=\nabla \cdot \nabla=\frac{\partial^{2}}{\partial x^{2}}+\frac{\partial^{2}}{\partial y^{2}}+\frac{\partial^{2}}{\partial z^{2}} \\
 \nabla^{2} V=\nabla \cdot(\nabla V)
 \end{gathered}
 $$
+
 - 几个矢量运算恒等式
 
 $$
