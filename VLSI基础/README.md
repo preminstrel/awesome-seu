@@ -8,9 +8,13 @@
 - $NM_L=V_{IL}-V_{OL}, NM_H=V_{OH}-V_{IH}$
 - 再生性保证了一个受干扰地信号在通过若干逻辑级后逐渐收敛回到额定电平中的一个（要具有再生性，需要 VTC 有一个增益大于 1 的过渡区）
 - 理想：负载门的 $R_{in}$ 尽量大（输入电流最小），驱动门的 $R_{out}$ 尽量小（减小负载电流对输出电压的影响）
-- $t_p$ 定义了它对输入信号变化的响应有多快，定义为输入和输出波形 50% 翻转点之间的时间。**$t_r$: rise time;  $t_f$: fall time 是用来衡量单个信号波形而不是门的，表明了信号在不同电平间翻转有多快**$$t_p=\frac{t_{pLH}+t_{pHL}}{2}$$
+- $t_p$ 定义了它对输入信号变化的响应有多快，定义为输入和输出波形 50% 翻转点之间的时间。**$t_r$: rise time;  $t_f$: fall time 是用来衡量单个信号波形而不是门的，表明了信号在不同电平间翻转有多快**
+
+$$
+t_p=\frac{t_{pLH}+t_{pHL}}{2}
+$$
 - 环振：$T=2Nt_p>>t_f+t_r$
-- 一阶 RC 电路 $v_{out}=(1-e^{-t/\tau})V$ ==$0.69 \tau$ : 0~50%， $2.2\tau$ : 10%~90%==
+- 一阶 RC 电路 $v_{out}=(1-e^{-t/\tau})V$ $0.69 \tau$ : 0~50%， $2.2\tau$ : 10%~90%
 - 峰值功耗 $P_{peak}=i_{peak}V_{supply}$，平均功耗 $P_{av}=\frac{1}{T}\int_t^{t+T}p(t)dt=\frac{V_{supply}}{T}\int_t^{T+t}i(t)dt$
 - Power-Delay Product (PDP): $E=P_{av}\times t_p$ ; Energy-Delay Product (EDP): $E\times t_p$
 
@@ -21,17 +25,26 @@
 - 实际器件中反向电流大大超过饱和电流 $I_S$，这是由于在耗尽区因热而产生电子空穴对所造成的
 - 二极管结电容：$C_j=\frac{C_{j0}}{(1-V_D/\Phi_0)^m}$，$C_{j0}$ 是零偏下的电容，$m$ 是梯度系数，突变为 0.5，线性为 0.33 **此处有结电容与外加偏置电压的关系图 P55**
 - 二阶效应：强电场产生高速载流子，激发电子空穴对（雪崩击穿）
-- 二极管的 SPICE 模型* （P57）
+- 二极管的 SPICE 模型（P57）
 ### MOSFET
 - MOSFET：性能好，寄生效应小
 #### Static
-- 阈值电压 $V_T$：发生强反型时的 $V_{GS}$；$\gamma$ 为体效应系数 $$V_T=V_{T0}+\gamma(\sqrt{|-2\phi_F+V_{SB}|}-\sqrt{|-2\phi_F|})$$
+- 阈值电压 $V_T$：发生强反型时的 $V_{GS}$；$\gamma$ 为体效应系数 
+$$
+V_T=V_{T0}+\gamma(\sqrt{|-2\phi_F+V_{SB}|}-\sqrt{|-2\phi_F|})
+$$
 - $C_{ox}=\frac{\varepsilon_{ox}}{t_{ox}}$ 为栅氧的单位面积电容
 - 沟道长度调制效应：$L\to L-\Delta L$，沟道变短了，会发生隧穿，电子走的更容易了（短沟道显著）
 - 速度饱和：当沿沟道电场达到某一临界值 $\xi_c$ 的时候，载流子的速度将由于散射效应而趋于饱和（PMOS 中速度饱和效应不太显著）
-- MOS 管模型：（其中 $V_{\min}=\min(V_{GT},V_{DS},V_{DSAT})$）$$I_D=k'\frac{W}{L}(V_{GT}V_{\min}-\frac{V_{\min}^2}{2})(1+\lambda V_{DS})$$
+- MOS 管模型：（其中 $V_{\min}=\min(V_{GT},V_{DS},V_{DSAT})$）
+$$
+I_D=k'\frac{W}{L}(V_{GT}V_{\min}-\frac{V_{\min}^2}{2})(1+\lambda V_{DS})
+$$
 - 等效电阻 $R_{eq}$ 反比于器件宽长比 $\frac{W}{L}$，$V_{DD}\gg V_T+V_{DSAT}/2$ 时与 $V_{DD}$ 几乎无关，$V_{DD}$ 接近 $V_T$ 时电阻急剧提高
-- 传播延时：$0.69R_{on}C_L, V_{DS}=V_{DD}/2$ ($V_M$ 点)，计算 $V_{DD}\to V_{DD}/2$ 的等效电阻 $$R_{eq}=\frac{3}{4}\frac{V_{DD}}{I_{DSAT}}(1-\frac{7}{9}\lambda V_{DD})$$
+- 传播延时：$0.69R_{on}C_L, V_{DS}=V_{DD}/2$ ($V_M$ 点)，计算 $V_{DD}\to V_{DD}/2$ 的等效电阻 
+$$
+R_{eq}=\frac{3}{4}\frac{V_{DD}}{I_{DSAT}}(1-\frac{7}{9}\lambda V_{DD})
+$$
 #### Dynamic
 - 电容包括本征寄生电容、互连线寄生电容、负载电容。
 - 覆盖电容：$C_{GSO}=C_{GDO}=C_{ox}x_dW=C_oW \quad (C_{gate}=C_{ox}WL)$
@@ -114,11 +127,17 @@ $$
 t_p=t_{p0}(1+\frac{C_{ext}}{\gamma C_g})=t_{p0}(1+\frac{f}{\gamma})
 $$
 
-- 确定反相器链的尺寸：$C_{g,j}=\sqrt{C_{g,j-1}C_{g,j+1}}$，每个反相器的尺寸都相对于前面尺寸放大 $f$ 倍（$1,f,f^2,f^3\cdots,f^N=F=C_L/C_{g,1}$），即每个反相器都有相同的等效扇出 $f_i=f=\sqrt[N]{F}$ $$t_p=Nt_{p0}(1+f/\gamma)$$
+- 确定反相器链的尺寸：$C_{g,j}=\sqrt{C_{g,j-1}C_{g,j+1}}$，每个反相器的尺寸都相对于前面尺寸放大 $f$ 倍（$1,f,f^2,f^3\cdots,f^N=F=C_L/C_{g,1}$），即每个反相器都有相同的等效扇出 $f_i=f=\sqrt[N]{F}$ 
+$$
+t_p=Nt_{p0}(1+f/\gamma)
+$$
 - 确定反相器链的级数：$f=e^{1+\gamma/f}$，$\gamma=0,N=1;\gamma=1,N=3.6$
 - 修正表达式 $t_p^i=t_{step}^i+\eta t_{step}^{i-1}$
 ### Power Dissipation
-- 如果某个门每秒通断 $f_{0\to 1}$ 次，则功耗为$$P_{dyn}=C_LV_{DD}^2f_{0\to 1}$$
+- 如果某个门每秒通断 $f_{0\to 1}$ 次，则功耗为
+$$
+P_{dyn}=C_LV_{DD}^2f_{0\to 1}
+$$
 - 通过一个传输管来降低摆幅，从而降低能耗 $E_{0\to 1}=C_LV_{DD}(V_{DD}-V_T)$
 - 对于直接通路电流引起的功耗来说，输入变化要求快速，这样不容易形成直流通路 
 $$
@@ -180,7 +199,7 @@ $$
 - 注意输出不要出现三态情况
 - 管子数目少、结构规则易优化
 - 如果下一级连了 CMOS，因为阈值损失会导致产生静态电流（短路电流），引起静态功耗；同时也会导致 NMOS 的导通电阻增大，进一步影响延时-----> 功耗性能双劣化
-- 差分传输管逻辑*、差分摆幅恢复传输管逻辑*（门与门之间要插入缓冲器，否则会有竞争）
+- 差分传输管逻辑、差分摆幅恢复传输管逻辑（门与门之间要插入缓冲器，否则会有竞争）
 ##### 电平恢复
 - 优点：全摆幅
 - 缺点：增加复杂性（有比电路）、晶体管尺寸考虑（有可能恢复管太强）、增加了内部节点 X 上的电容从而减慢了这个门的速度
@@ -205,10 +224,14 @@ $$
 Out=\overline{CLK}+F\cdot CLK
 $$
 
-缺点：高动态功耗，低噪声容限（$V_{M}=V_{IH}=V_{IL}=V_{Tn}=NM_{L}$），需要预充电时钟，要给时钟信号负载
+缺点：高动态功耗，低噪声容限，需要预充电时钟，要给时钟信号负载
 - 也可以用 PMOS 来实现，但是 PMOS 比 NMOS 慢，因为 PMOS 管的驱动电流较小
 - 问题 1 - 电荷泄漏：存在漏电流（反偏二极管和亚阈值漏电）会让电荷逐渐漏掉，因此会有一个最低的时钟频率要求；**解决方法：增加一个泄漏晶体管（伪 NMOS 上拉器件或者输出接反相器再作为一个 PMOS 上拉管的输入 [反馈形式]）**
-- 问题 2 - 电荷分享：下拉网络的一个电容被充电，$C_L\to C_L+C_A$，进一步导致输出电平的下降 $$\Delta V_{out}=-\frac{C_A}{C_L}(V_{DD}-V_{Tn}(V_X))\qquad if \quad\Delta V_{out}<V_{Tn}$$$$\Delta V_{out}=-V_{DD}(\frac{C_A}{C_L+C_A})\qquad if \quad\Delta V_{out}>V_{Tn}$$ **解决办法：对那个电荷分享的节点进行电平补偿（预充电），但是会增加面积和电容/功耗**
+- 问题 2 - 电荷分享：下拉网络的一个电容被充电，$C_L\to C_L+C_A$，进一步导致输出电平的下降 
+$$
+\Delta V_{out}=-\frac{C_A}{C_L}(V_{DD}-V_{Tn}(V_X))\qquad if \quad\Delta V_{out}<V_{Tn}$$$$\Delta V_{out}=-V_{DD}(\frac{C_A}{C_L+C_A})\qquad if \quad\Delta V_{out}>V_{Tn}
+$$ 
+**解决办法：对那个电荷分享的节点进行电平补偿（预充电），但是会增加面积和电容/功耗**
 - 问题 3 - 背栅耦合：输出节点的高阻抗会让电路对串扰的影响十分敏感，输出的变化会通过栅源和栅漏电容耦合到之前的输出（即输出至输入的耦合）
 - 问题 4 - 时钟馈通：相当于过冲，由预充电器件的时钟输入和动态输出节点之间的电容耦合引起的效应。耦合电容由预充电器件的栅漏电容组成，包括了覆盖电容和沟道电容。
 - 两个动态逻辑不可以直接串联，前一级要放电要时间，会使得后一级输出错误！可以用多米诺逻辑，在两者之间加一个反相器（输入端仅接受 0-1 的转变，非反相逻辑），可以实现非常高的速度。**扇出是一个巨有低阻抗输出的静态反相器驱动，提高了抗噪声能力；同时由于缓冲器隔离了内部和负载电容，减少了动态输出节点的电容。**
@@ -230,8 +253,11 @@ $$
 - TSPCR 真单相钟控寄存器仅用单相位时钟，缺点是稍微增加了晶体管的数目（12个）；如果输出节点连接传输门有可能发生电荷分享，动态节点应该借助静态反相器隔离或者设计成伪静态提高抗噪能力
 - TSPC 可以实现将逻辑功能嵌入电路中 
 - TSPC Latch 可以简化成只有一个 CLK 输入，时钟负载减半，但是无法让所有节点达到全摆幅（P233）
-- TSPC 可以中间插入一个动态反相器实现寄存器功能（缺点：需要 $t_{hold}$）$$t_{su}=t_{inv}\qquad t_{c-q}=3t_{inv}$$
-![[Pasted image 20220621125826.png|400]]
+- TSPC 可以中间插入一个动态反相器实现寄存器功能（缺点：需要 $t_{hold}$）
+- $$
+t_{su}=t_{inv}\qquad t_{c-q}=3t_{inv}
+$$
+
 - 脉冲寄存器：只在很短的窗口内采样输入，所以透明时间很短，避免了竞争情况
 - 短脉冲产生器
 - 如何增加使能输入？
@@ -258,7 +284,14 @@ $$
 - 最小宽度的导线先以最小节距不限，相邻层的导线相互垂直布线，使串扰最小。缺点是面积和电容的增加，随之增加了延时和功耗
 - 编码数据消除最坏情形的翻转能使总线加速
 - 驱动大电容负载：确定合适的尺寸，把驱动器划分成逐渐增大的缓冲器链有助于解决大 Fan Out 问题$$t_p=\frac{C_LV_{swing}}{I_{av}}$$
-- 给定 $t_{pmax}$ 优化 $N$ 和 $f$ （要把一个电路设计成合适的速度而不是最高的速度）$$A_{driver}=\frac{f^N-1}{f-1}A_{min}$$ $$E_{driver}=\frac{F-1}{f-1}(1+\gamma)C_iV_{DD}^2\approx \frac{2C_L}{f-1}V_{DD}^2$$
+- 给定 $t_{pmax}$ 优化 $N$ 和 $f$ （要把一个电路设计成合适的速度而不是最高的速度）
+$$
+A_{driver}=\frac{f^N-1}{f-1}A_{min}
+$$ 
+
+$$
+E_{driver}=\frac{F-1}{f-1}(1+\gamma)C_iV_{DD}^2\approx \frac{2C_L}{f-1}V_{DD}^2
+$$
 - 较长的多晶线通常有很高的电阻——宽晶体管的实现：降低扩散电容、门电阻
 - ESD：充电到很高的静电势若接入引线会对输入晶体管造成致命损伤
 - 三态门（第二个用于驱动大电容）
@@ -270,8 +303,12 @@ $$
 - Delay penalty is paid by the receiver
 - Requires use of “sense amplifier” to restore signal level （恢复较高性能）
 - Frequently designed differentially (e.g. LVDS)
+
+
 #### 静态降摆幅电路
 - 以上电路：保证了输出恢复到 $V_{DD}$，稳定状态下无静态功耗，正反馈有助于加速翻转，但是对于较低的摆幅值时速度太慢难以接受
+
+
 #### 动态降摆幅电路
 利用预充电，所有输入门公用所以充电时间很快；求值器件由一下拉晶体管有条件地放电，这一过程很缓慢因为大电容 $C_{bus}$ 要通过小的下拉器件放电。
 - 可以通过增加 $M_4$ 的面积来提高上拉能力
@@ -281,10 +318,18 @@ $$
 - 欧姆电压降会导致系统性能的影响，因为电源电压很小的下降都会导致延时的明细增加，会引入噪声
 - 电迁移：在一条导线上较长时间流过的直流电流会引起金属离子移动，导致导线断裂或另一条短路（取决于温度、晶体结构、平均电流密度）
 - 电迁移与平均电流成正比，IR 电压降则与峰值电流有关
+
 #### RC 延时
-$$T_d=0.38R_wC_w+0.69(R_dC_{out}+R_dC_w+R_wC_{out})$$
+$$
+T_d=0.38R_wC_w+0.69(R_dC_{out}+R_dC_w+R_wC_{out})
+$$
 - 采用更好的互联材料
-- 插入中继器 $$m_{opt}=L\sqrt{\frac{0.38rc}{t_{buffer}}}=L\sqrt{\frac{0.38rc}{0.69R_dC_d(\gamma+1)}}$$
+- 插入中继器 
+
+$$
+m_{opt}=L\sqrt{\frac{0.38rc}{t_{buffer}}}=L\sqrt{\frac{0.38rc}{0.69R_dC_d(\gamma+1)}}
+$$
+
 - 采用更好的互联策略（45°）
 - 优化互联结构
 - 从两端驱动字线（双向驱动）、采用金属旁路（小电阻并联大电阻）
@@ -292,9 +337,25 @@ $$T_d=0.38R_wC_w+0.69(R_dC_{out}+R_dC_w+R_wC_{out})$$
 ## Chapter 11: Arithmetic Circuits
 ### Adder
 #### Complimentary Static CMOS Full Adder 
-$$C_o=AB+(A+B)C_i$$$$S=A\oplus B\oplus C_i=ABC_i+(A+B+C_i)\overline{C_o}$$ 
+$$
+C_o=AB+(A+B)C_i
+$$
+$$
+S=A\oplus B\oplus C_i=ABC_i+(A+B+C_i)\overline{C_o}
+$$ 
+
 #### 镜像加法器 
-用中间信号的函数来表达：$$G=AB\qquad D=\overline{A}\overline{B}\qquad P=A\oplus B$$$$C_o(G,P)=G+PC_i=AB+(A+B)C_i$$ $$S(G,P)=P\oplus C_i=ABC_i+\overline{C_o}(A+B+C_i)$$  
+用中间信号的函数来表达：
+$$
+G=AB\qquad D=\overline{A}\overline{B}\qquad P=A\oplus B
+$$
+$$
+C_o(G,P)=G+PC_i=AB+(A+B)C_i
+$$ 
+$$
+S(G,P)=P\oplus C_i=ABC_i+\overline{C_o}(A+B+C_i)
+$$  
+
 - The NMOS and PMOS chains are completely symmetrical.  
 - A maximum of two series transistors can be observed in the carry-generation circuitry.
 - When laying out the cell, the most critical issue is the minimization of the capacitance at node $C_o$. The reduction of the diffusion capacitances is particularly important.
@@ -308,8 +369,13 @@ $$C_o=AB+(A+B)C_i$$$$S=A\oplus B\oplus C_i=ABC_i+(A+B+C_i)\overline{C_o}$$
 #### Manchester 进位加法链
 #### 超前进位加法器
 由于电容原因，这一电路实现的面积也与 $N$ 成比例增加，所以建议 $N\le 4$
-$$C_{o,k}=G_k+P_kC_{o,k-1}=G_k+P_k(G_{k-1}+P_{k-1}C_{o,k-2})$$
-$$t_p\propto \log_2(N)$$
+$$
+C_{o,k}=G_k+P_kC_{o,k-1}=G_k+P_k(G_{k-1}+P_{k-1}C_{o,k-2})
+$$
+$$
+t_p\propto \log_2(N)
+$$
+
 ### Shifter
 #### 
 传播延时是常数，与移位的位数/移位器的规模无关
@@ -359,7 +425,10 @@ $$t_p\propto \log_2(N)$$
 
 #### DRAM 1T
 - 写入：直接写入 $C_{BL}$ 到 $C_S$
-- 读取：位线被预充电到 $V_{PRE}$，之后进行电荷的重新分配，使电压变化 $$\Delta V=V_{BL}-V_{PRE}=(V_{BIT}-V_{PRE})\frac{C_S}{C_S+C_{BL}}$$
+- 读取：位线被预充电到 $V_{PRE}$，之后进行电荷的重新分配，使电压变化 
+$$
+\Delta V=V_{BL}-V_{PRE}=(V_{BIT}-V_{PRE})\frac{C_S}{C_S+C_{BL}}
+$$
 - 需要灵敏放大器读出
 - 读取是破坏性的，需要刷新
 - 1T要求有一个额外的电容被包括在设计中
