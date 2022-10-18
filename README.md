@@ -1,7 +1,6 @@
 # Awesome SEU 东南大学
 
 <a href="https://github.com/preminstrel/awesome-seu">![GitHub Repo stars](https://img.shields.io/github/stars/preminstrel/awesome-seu?style=flat-square&logo=github&color=yellow)</a>
-<a href="https://github.com/preminstrel/awesome-seu">![Github Repo downloads](https://img.shields.io/github/downloads/preminstrel/awesome-seu/total?style=flat-square)
 <a title="Hits" target="_blank" href="https://github.com/preminstrel/awesome-seu"><img src="https://hits.b3log.org/preminstrel/awesome-seu.svg"></a>
 
 留给学弟学妹们的资源，笔者是 6 系的，但是很多资料都是通用的，也欢迎不同院系/本院系的其他同学提供多样的资源并 Pull Requests。
