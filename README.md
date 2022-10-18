@@ -9,3 +9,7 @@
 如果你想获得/添加/修改内容，可以提交 Pull requests 或使用 Issues，也可以[直接联系我](mailto:preminstrel@gmail.com)。希望本 Repo 可以帮助到更多的人。
 
 - 资料格式建议使用 PDF 格式，docx/ppt 请转为 PDF 格式
+
+### 贡献/参与者
+
+[![Contributors](https://contributors-img.web.app/image?repo=preminstrel/awesome-seu)](https://github.com/preminstrel/awesome-seu/graphs/contributors)
