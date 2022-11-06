@@ -10,7 +10,7 @@
 - 资料格式建议使用 PDF 格式，docx/ppt 请转为 PDF 格式
 
 ## 网络环境
-由于一些不可抗力因素，国内访问GitHub或者下载本repo的文件会有些困难。如果不会翻墙/用VPN，这里推荐一个小工具：[FastGitHub](https://github.com/dotnetcore/FastGithub)，我这里提供百度云盘的下载链接（Windows版本）：
+一些同学反应，由于一些不可抗力因素，国内访问GitHub或者下载本repo的文件会有些困难。如果不会翻墙/用VPN，这里推荐一个小工具：[FastGitHub](https://github.com/dotnetcore/FastGithub)，我这里提供百度云盘的下载链接（Windows版本）：
 > 链接: https://pan.baidu.com/s/1eF5c01A_6CxRsa5lx0SYlQ?pwd=6gj6 提取码: 6gj6
 
 ## TODO
